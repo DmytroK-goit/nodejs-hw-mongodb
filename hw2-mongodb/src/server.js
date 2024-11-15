@@ -9,7 +9,7 @@ async function setupServer() {
   try {
     await initMongoConnection();
 
-    const PORT = process.env.PORT || 8080;
+    const PORT = env('MONGODB_USER');
 
     app.listen(PORT, () => {
       console.log(`Server started on port ${PORT}`);
