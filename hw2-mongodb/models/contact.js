@@ -1,23 +1,34 @@
 import mongoose from 'mongoose';
 
-const studentSchema = new mongoose.Schema(
+const contactSchema = new mongoose.Schema(
   {
     name: {
       type: String,
       required: true,
     },
-    year: {
-      type: Number,
-      required: true,
-    },
-    gender: {
+    phoneNumber: {
       type: String,
-      enum: ['male', 'female'],
       required: true,
     },
-    onDuty: {
+    email: {
+      type: String,
+      required: true,
+    },
+    isFavourite: {
       type: Boolean,
       default: false,
+    },
+    contactType: {
+      type: String,
+      required: true,
+    },
+    createdAt: {
+      type: Date,
+      required: true,
+    },
+    updatedAt: {
+      type: Date,
+      required: true,
     },
   },
   {
@@ -25,4 +36,4 @@ const studentSchema = new mongoose.Schema(
   },
 );
 
-export const Student = mongoose.model('Student', studentSchema); // students
+export const Contact = mongoose.model('Contact', contactSchema);
