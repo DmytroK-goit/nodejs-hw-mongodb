@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { Contact } from '../models/contact.js';
+import { Contact } from './services/contact.js';
 import { initMongoConnection } from './db/initMongoConnection.js';
 import { env } from '../utils/env.js';
 
