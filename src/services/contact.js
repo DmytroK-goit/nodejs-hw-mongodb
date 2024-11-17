@@ -20,15 +20,8 @@ const contactSchema = new mongoose.Schema(
     },
     contactType: {
       type: String,
-      required: true,
-    },
-    createdAt: {
-      type: Date,
-      required: true,
-    },
-    updatedAt: {
-      type: Date,
-      required: true,
+      enum: ['work', 'home', 'personal'],
+      default: 'personal',
     },
   },
   {
