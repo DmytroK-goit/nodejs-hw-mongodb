@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { Contact } from './services/contact.js';
 import { initMongoConnection } from './db/initMongoConnection.js';
-import { env } from '../utils/env.js';
+import { env } from '../src/utils/env.js';
 
 const app = express();
 app.use(cors());
