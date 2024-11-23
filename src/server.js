@@ -1,40 +1,18 @@
 import express from 'express';
 import cors from 'cors';
-import { Contact } from './services/contact.js';
+import routes from '../src/routers/index.js';
 import { initMongoConnection } from './db/initMongoConnection.js';
 import { env } from '../src/utils/env.js';
+import { errorHandler } from '../src/middlewares/errorHandler.js';
+import { notFoundHandler } from '../src/middlewares/notFoundHandler.js';
 
 const app = express();
 app.use(cors());
+app.use(express.json());
+app.use('/api', routes);
 
-app.get('/contacts', async (req, res) => {
-  const contacts = await Contact.find();
-  res.send({
-    status: 200,
-    message: 'Successfully found contacts!',
-    data: contacts,
-  });
-});
-app.get('/contacts/:id', async (req, res) => {
-  const { id } = req.params;
-  const contact = await Contact.findById(id);
-  if (contact === null) {
-    return res.status(404).send({ status: 404, message: 'Contact not found' });
-  }
-  res.send({
-    status: 200,
-    message: `Successfully found contact with id ${id}!`,
-    data: contact,
-  });
-  console.log(contact);
-});
-
-app.use((req, res, next) => {
-  res.status(404).send({ status: 404, message: 'Not found' });
-});
-app.use((error, req, res, next) => {
-  res.status(500).send({ status: 500, message: 'Internal server error' });
-});
+app.use(errorHandler);
+app.use(notFoundHandler);
 
 export async function setupServer() {
   try {
