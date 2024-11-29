@@ -9,7 +9,7 @@ import { notFoundHandler } from '../src/middlewares/notFoundHandler.js';
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use('/api', routes);
+app.use(routes);
 
 app.use(errorHandler);
 app.use(notFoundHandler);
