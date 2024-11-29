@@ -7,11 +7,21 @@ import {
   deleteContact,
   updContact,
 } from '../services/contacts.js';
+import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 
 export async function getContactsController(req, res) {
-  const contacts = await getContacts();
+  const { page, perPage } = parsePaginationParams(req.query);
 
-  res.send({ status: 200, data: contacts });
+  const contacts = await getContacts({
+    page,
+    perPage,
+  });
+
+  res.send({
+    status: 200,
+    message: 'Successfully found contacts!',
+    data: contacts,
+  });
 }
 
 export async function getContactController(req, res) {
