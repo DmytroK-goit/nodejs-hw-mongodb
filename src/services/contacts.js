@@ -17,8 +17,7 @@ export async function getContacts({ page, perPage, sortBy, sortOrder }) {
       .limit(perPage),
   ]);
   const totalPage = Math.ceil(total / perPage);
-  console.log('SortBy:', validSortBy);
-  console.log('SortOrder:', validSortOrder);
+
   return {
     contacts,
     page,
