@@ -1,22 +1,29 @@
 import { Contact } from '../services/contact.js';
+import { parseSortParams } from '../utils/parseSortParams.js';
 
-export async function getContacts({ page, perPage }) {
+export async function getContacts({ page, perPage, sortBy, sortOrder }) {
   const skip = page > 0 ? (page - 1) * perPage : 0;
 
+  const { sortBy: validSortBy, sortOrder: validSortOrder } = parseSortParams({
+    sortBy,
+    sortOrder,
+  });
   const contactQuery = Contact.find();
   const [total, contacts] = await Promise.all([
-    Contact.countDocuments(contactQuery),
-    contactQuery.skip(skip).limit(perPage),
+    Contact.countDocuments(),
+    contactQuery
+      .sort({ [validSortBy]: validSortOrder === 'asc' ? 1 : -1 })
+      .skip(skip)
+      .limit(perPage),
   ]);
   const totalPage = Math.ceil(total / perPage);
+
   return {
     contacts,
     page,
     perPage,
     totalItems: total,
     totalPage,
-    // hasPreviousPage: page > 1,
-    // hasNextPage: page < totalPages,
   };
 }
 export function getContact(contactId) {
