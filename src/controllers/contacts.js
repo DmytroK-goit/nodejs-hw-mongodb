@@ -11,20 +11,32 @@ import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 import { parseSortParams } from '../utils/parseSortParams.js';
 
 export async function getContactsController(req, res) {
-  const { page, perPage } = parsePaginationParams(req.query);
+  const { page, perPage, totalPages, hasPreviousPage, hasNextPage } =
+    parsePaginationParams(req.query);
   const { sortBy, sortOrder } = parseSortParams(req.query);
 
-  const contacts = await getContacts({
+  const contactsResult = await getContacts({
     page,
     perPage,
     sortBy,
     sortOrder,
+    totalPages,
+    hasPreviousPage,
+    hasNextPage,
   });
 
   res.send({
     status: 200,
     message: 'Successfully found contacts!',
-    data: contacts,
+    data: {
+      data: contactsResult.contacts,
+      page: contactsResult.page,
+      perPage: contactsResult.perPage,
+      totalItems: contactsResult.totalItems,
+      totalPages: contactsResult.totalPages,
+      hasPreviousPage: contactsResult.hasPreviousPage,
+      hasNextPage: contactsResult.hasNextPage,
+    },
   });
 }
 
@@ -65,9 +77,7 @@ export async function deleteContactController(req, res) {
     throw new createHttpError.NotFound('Contact not found');
   }
   res.send({
-    status: 200,
-    message: 'Contact delete successfully',
-    data: result,
+    status: 204,
   });
 }
 export async function updContactController(req, res) {
