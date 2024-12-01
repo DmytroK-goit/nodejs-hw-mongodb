@@ -8,22 +8,24 @@ export async function getContacts({ page, perPage, sortBy, sortOrder }) {
     sortBy,
     sortOrder,
   });
-  const contactQuery = Contact.find();
-  const [total, contacts] = await Promise.all([
-    Contact.countDocuments(),
-    contactQuery
-      .sort({ [validSortBy]: validSortOrder === 'asc' ? 1 : -1 })
-      .skip(skip)
-      .limit(perPage),
-  ]);
-  const totalPage = Math.ceil(total / perPage);
+
+  const totalItems = await Contact.countDocuments();
+
+  const contacts = await Contact.find()
+    .sort({ [validSortBy]: validSortOrder === 'asc' ? 1 : -1 })
+    .skip(skip)
+    .limit(perPage);
+
+  const totalPages = Math.ceil(totalItems / perPage);
 
   return {
     contacts,
     page,
     perPage,
-    totalItems: total,
-    totalPage,
+    totalItems,
+    totalPages,
+    hasPreviousPage: page > 1,
+    hasNextPage: page < totalPages,
   };
 }
 export function getContact(contactId) {
