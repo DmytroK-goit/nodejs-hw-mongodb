@@ -1,4 +1,4 @@
-import { Contact } from '../services/contact.js';
+import { Contact } from '../models/contact.js';
 import { parseSortParams } from '../utils/parseSortParams.js';
 
 export async function getContacts({ page, perPage, sortBy, sortOrder }) {
