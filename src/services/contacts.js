@@ -1,7 +1,13 @@
 import { Contact } from '../models/contact.js';
 import { parseSortParams } from '../utils/parseSortParams.js';
 
-export async function getContacts({ page, perPage, sortBy, sortOrder }) {
+export async function getContacts({
+  page,
+  perPage,
+  sortBy,
+  sortOrder,
+  userId,
+}) {
   const skip = page > 0 ? (page - 1) * perPage : 0;
 
   const { sortBy: validSortBy, sortOrder: validSortOrder } = parseSortParams({
@@ -9,9 +15,9 @@ export async function getContacts({ page, perPage, sortBy, sortOrder }) {
     sortOrder,
   });
 
-  const totalItems = await Contact.countDocuments();
+  const totalItems = await Contact.countDocuments({ userId });
 
-  const contacts = await Contact.find()
+  const contacts = await Contact.find({ userId })
     .sort({ [validSortBy]: validSortOrder === 'asc' ? 1 : -1 })
     .skip(skip)
     .limit(perPage);

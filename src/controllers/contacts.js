@@ -11,6 +11,8 @@ import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 import { parseSortParams } from '../utils/parseSortParams.js';
 
 export async function getContactsController(req, res) {
+  console.log(req.user);
+
   const { page, perPage, totalPages, hasPreviousPage, hasNextPage } =
     parsePaginationParams(req.query);
   const { sortBy, sortOrder } = parseSortParams(req.query);
@@ -23,6 +25,7 @@ export async function getContactsController(req, res) {
     totalPages,
     hasPreviousPage,
     hasNextPage,
+    // userId: req.user._id,
   });
 
   res.send({
@@ -62,6 +65,7 @@ export async function createContactController(req, res) {
     email: req.body.email,
     isFavourite: req.body.isFavourite,
     contactType: req.body.contactType,
+    userId: req.user._id,
   };
   const result = await createContact(contact);
   res.status(201).send({
