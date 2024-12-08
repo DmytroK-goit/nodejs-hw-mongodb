@@ -5,8 +5,9 @@ import { initMongoConnection } from './db/initMongoConnection.js';
 import { env } from '../src/utils/env.js';
 import { errorHandler } from '../src/middlewares/errorHandler.js';
 import { notFoundHandler } from '../src/middlewares/notFoundHandler.js';
-
+import cookieParser from 'cookie-parser';
 const app = express();
+app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
 app.use(routes);
