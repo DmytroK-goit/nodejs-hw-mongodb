@@ -25,7 +25,7 @@ export async function getContactsController(req, res) {
     totalPages,
     hasPreviousPage,
     hasNextPage,
-    // userId: req.user._id,
+    userId: req.user._id,
   });
 
   res.send({
