@@ -4,7 +4,7 @@ import authRoutes from './auth.js';
 import { auth } from '../middlewares/auth.js';
 
 const router = express.Router();
-router.use('/', authRoutes);
+router.use('/auth', authRoutes);
 
 router.use('/contacts', auth, contactRoutes);
 
