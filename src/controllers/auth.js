@@ -13,6 +13,7 @@ export async function registerController(req, res) {
   };
 
   const registeredUser = await registerUser(payload);
+
   res.send({
     status: 200,
     massage: 'User registered',
