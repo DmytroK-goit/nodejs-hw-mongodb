@@ -34,15 +34,17 @@ export async function getContacts({
     hasNextPage: page < totalPages,
   };
 }
-export function getContact(contactId) {
-  return Contact.findById(contactId);
+export function getContact(contactId, userId) {
+  return Contact.findOne({ _id: contactId, userId });
 }
 export function createContact(contact) {
   return Contact.create(contact);
 }
-export function deleteContact(contactId) {
-  return Contact.findByIdAndDelete(contactId);
+export function deleteContact(contactId, userId) {
+  return Contact.findOneAndDelete({ _id: contactId, userId });
 }
-export function updContact(contactId, contact) {
-  return Contact.findByIdAndUpdate(contactId, contact, { new: true });
+export function updContact(contactId, contact, userId) {
+  return Contact.findOneAndUpdate({ _id: contactId, userId }, contact, {
+    new: true,
+  });
 }
