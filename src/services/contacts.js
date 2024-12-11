@@ -1,3 +1,5 @@
+import mongoose from 'mongoose';
+
 import { Contact } from '../models/contact.js';
 import { parseSortParams } from '../utils/parseSortParams.js';
 

@@ -96,13 +96,14 @@ export async function updContactController(req, res) {
     isFavourite: req.body.isFavourite,
     contactType: req.body.contactType,
   };
-  const result = await updContact(id, userId, contact);
+
+  const result = await updContact(id, contact, userId);
   if (result === null) {
     throw new createHttpError.NotFound('Contact not found');
   }
   res.send({
     status: 200,
-    message: 'Contact update successfully',
+    message: 'Contact updated successfully',
     data: result,
   });
 }
