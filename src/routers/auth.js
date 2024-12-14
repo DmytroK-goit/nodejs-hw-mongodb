@@ -38,14 +38,14 @@ router.post('/logout', ctrlWrapper(logoutController));
 router.post('/refresh', ctrlWrapper(refreshController));
 
 router.post(
-  '/request-reset-password',
+  '/send-reset-email',
   jsonParse,
   validateBody(requestResetPasswordSchema),
   ctrlWrapper(requestResetPasswordController),
 );
 
 router.post(
-  '/reset-password',
+  '/reset-pwd',
   jsonParse,
   validateBody(resetPasswordSchema),
   ctrlWrapper(resetPasswordController),
