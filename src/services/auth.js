@@ -89,7 +89,7 @@ export async function requestResetPassword(email) {
     { sub: user._id, email: user.email },
     process.env.JWT_SECRET,
     {
-      expiresIn: '15m',
+      expiresIn: '5m',
     },
   );
   console.log(resetToken);
