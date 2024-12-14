@@ -9,10 +9,9 @@ import {
 } from '../services/contacts.js';
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 import { parseSortParams } from '../utils/parseSortParams.js';
+import { uploadToCloudinary } from '../utils/uploadToCloudinary.js';
 
 export async function getContactsController(req, res) {
-  console.log(req.user);
-
   const { page, perPage, totalPages, hasPreviousPage, hasNextPage } =
     parsePaginationParams(req.query);
   const { sortBy, sortOrder } = parseSortParams(req.query);
@@ -46,7 +45,6 @@ export async function getContactsController(req, res) {
 export async function getContactController(req, res) {
   const { id } = req.params;
   const userId = req.user._id;
-  console.log(userId);
 
   const contact = await getContact(id, userId);
   if (contact === null) {
@@ -61,7 +59,6 @@ export async function getContactController(req, res) {
 }
 
 export async function createContactController(req, res) {
-  console.log(req.body);
   const contact = {
     name: req.body.name,
     phoneNumber: req.body.phoneNumber,
