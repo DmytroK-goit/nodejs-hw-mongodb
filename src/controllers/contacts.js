@@ -104,12 +104,28 @@ export async function deleteContactController(req, res) {
 export async function updContactController(req, res) {
   const { id } = req.params;
   const userId = req.user._id;
+
+  let photo = null;
+  if (typeof req.file !== 'undefined') {
+    if (process.env.ENABLE_CLOUDINARY === 'true') {
+      const resultPhoto = await uploadToCloudinary(req.file.path);
+      await fs.unlink(req.file.path);
+      photo = resultPhoto.secure_url;
+    } else {
+      await fs.rename(
+        req.file.path,
+        path.resolve('src', 'public', 'photo', req.file.filename),
+      );
+      photo = `http://localhost:8080/contacts/photos/${req.file.filename}`;
+    }
+  }
   const contact = {
     name: req.body.name,
     phoneNumber: req.body.phoneNumber,
     email: req.body.email,
     isFavourite: req.body.isFavourite,
     contactType: req.body.contactType,
+    photo,
   };
 
   const result = await updContact(id, contact, userId);

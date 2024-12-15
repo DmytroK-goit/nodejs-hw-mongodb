@@ -34,6 +34,7 @@ router.delete(
 );
 router.patch(
   '/:id',
+  upload.single('photo'),
   jsonParser,
   isValidId,
   validateBody(updateContactSchema),
