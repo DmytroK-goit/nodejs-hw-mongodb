@@ -92,7 +92,6 @@ export async function requestResetPassword(email) {
       expiresIn: '5m',
     },
   );
-  console.log(resetToken);
 
   const html = handlebars.compile(RESET_PASSWORD_TEMPLATE);
 

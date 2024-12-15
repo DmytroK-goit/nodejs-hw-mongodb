@@ -48,5 +48,6 @@ export function deleteContact(contactId, userId) {
 export function updContact(contactId, contact, userId) {
   return Contact.findOneAndUpdate({ _id: contactId, userId }, contact, {
     new: true,
+    runValidators: true,
   });
 }
