@@ -8,37 +8,38 @@ required:
   - teacherId
 properties:
   _id:
-    description: "Student's id"
+    description: "Contacts's id"
     type: string
-    example: '672e559aefd1ec206c1b77a8'
+    example: '675ea14c44b40dd798c836d5'
   name:
-    description: "Student's name"
+    description: "Contacts's name"
     type: string
-    example: 'John Doe'
-  gender:
-    description: "Student's gender"
+    example: 'Dima'
+  phoneNumber:
+    description: "Contact's phone"
     type: string
-    enum: ['male', 'female']
-    example: 'male'
+    example: '+3809700000111'
   email:
-    description: "Student's email"
+    description: "Contact's email"
     type: string
     example: 'johndoe@gmail.com'
-  age:
-    description: "Student's age"
-    type: integer
-    example: 26
-  onDuty:
-    description: 'Whether is student on duty'
+  isFavorite:
+    description: 'Favorite contact'
     type: boolean
     example: false
     default: false
-  teacherId:
-    description: "Student's teacher id"
+  contactType:
+    description: "Contact's type"
     type: string
-    example: 66a92312c1de214c68f17d10
-  avatar:
-    description: "Student's avatar"
+    enum: ['work', 'home', 'personal']
+    example: 'personal'
+    default: 'personal'
+  userId:
+    description: "Contact's user id"
     type: string
-    example: https://res.cloudinary.com/dha4xvgfi/image/upload/v1724438545/g3n05nth0sgqzyakh0dm.jpg
+    example: 67598c91a100dace958e83d1
+  photo:
+    description: "Contact's photo"
+    type: string
+    example: https://res.cloudinary.com/dingybgqw/image/upload/v1734254924/ylsj3dqw9hm7mhrj6dcv.webp
     default: null
