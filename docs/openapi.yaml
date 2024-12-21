@@ -8,12 +8,16 @@ info:
   description: This is a documentation of Contact Book
 tags:
   - name: Contacts
-  - description: Operation with contacts
+    description: Operation with contacts
 servers:
   - url: http://localhost:3000
-  - url: #посилання на задеплоєний сайт
 paths:
-  # тут будуть посилання на ендпоінти
+  /contacts:
+    post:
+      $ref: ../swagger/paths/contacts/post.yaml
+  /contacts/{id}:
+    get:
+      $ref: ../swagger/paths/contacts/{id}/get.yaml
 components:
   securitySchemes:
     bearerAuth:
