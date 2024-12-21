@@ -2,10 +2,14 @@ type: object
 required:
   - _id
   - name
-  - gender
+  - phoneNumber
   - email
-  - age
-  - teacherId
+  - isFavourite
+  - contactType
+  - userId
+  - photo
+  - createdAt
+  - updatedAt
 properties:
   _id:
     description: "Contacts's id"
@@ -43,3 +47,17 @@ properties:
     type: string
     example: https://res.cloudinary.com/dingybgqw/image/upload/v1734254924/ylsj3dqw9hm7mhrj6dcv.webp
     default: null
+  createdAt:
+    description: 'Timestamp when the contact was created'
+    type: string
+    format: date-time
+    example: 2024-12-14T12:28:14.781Z
+  updatedAt:
+    description: 'Timestamp when the contact was last updated'
+    type: string
+    format: date-time
+    example: 2024-12-15T09:27:36.051Z
+  __v:
+    description: Version application
+    type: string
+    example: 0
