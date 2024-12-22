@@ -1,5 +1,4 @@
 import path from 'node:path';
-
 import express from 'express';
 import cors from 'cors';
 import routes from '../src/routers/index.js';
@@ -8,12 +7,15 @@ import { env } from '../src/utils/env.js';
 import { errorHandler } from '../src/middlewares/errorHandler.js';
 import { notFoundHandler } from '../src/middlewares/notFoundHandler.js';
 import cookieParser from 'cookie-parser';
+import { swaggerDocs } from './middlewares/swaggerDocs.js';
+export const SWAGGER_PATH = path.join(process.cwd(), 'docs', 'swagger.json');
 const app = express();
 
 app.use(cookieParser());
 app.use('/photos', express.static(path.resolve('src/public/photo')));
 app.use(cors());
 app.use(express.json());
+app.use('/api-docs', swaggerDocs());
 
 app.use(routes);
 
