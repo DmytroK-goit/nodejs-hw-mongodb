@@ -11,6 +11,7 @@ tags:
     description: Operation with contacts
 servers:
   - url: http://localhost:8080
+  - url: https://nodejs-hw-mongodb-2hns.onrender.com
 paths:
   /contacts:
     post:
