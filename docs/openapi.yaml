@@ -10,14 +10,20 @@ tags:
   - name: Contacts
     description: Operation with contacts
 servers:
-  - url: http://localhost:3000
+  - url: http://localhost:8080
 paths:
   /contacts:
     post:
       $ref: ../swagger/paths/contacts/post.yaml
+    get:
+      $ref: ../swagger/paths/contacts/get.yaml
   /contacts/{id}:
     get:
       $ref: ../swagger/paths/contacts/{id}/get.yaml
+    delete:
+      $ref: ../swagger/paths/contacts/{id}/del.yaml
+    patch:
+      $ref: ../swagger/paths/contacts/{id}/patch.yaml
 components:
   securitySchemes:
     bearerAuth:
