@@ -322,6 +322,9 @@
           "401": {
             "$ref": "#/components/responses/401"
           },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
           "500": {
             "$ref": "#/components/responses/500"
           }
@@ -498,11 +501,7 @@
           "_id",
           "name",
           "phoneNumber",
-          "email",
-          "isFavourite",
           "contactType",
-          "userId",
-          "photo",
           "createdAt",
           "updatedAt"
         ],
