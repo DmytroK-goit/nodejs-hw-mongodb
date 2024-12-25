@@ -40,10 +40,10 @@ requestBody:
             type: string
             enum: ['work', 'home', 'personal']
             example: 'personal'
-          userId:
-            description: "User's ID associated with the contact"
-            type: string
-            example: '67598c91a100dace958e83d1'
+          # userId:
+          #   description: "User's ID associated with the contact"
+          #   type: string
+          #   example: '67598c91a100dace958e83d1'
           photo:
             description: "Contact's photo"
             type: string

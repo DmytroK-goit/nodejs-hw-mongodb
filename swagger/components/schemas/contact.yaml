@@ -3,11 +3,9 @@ required:
   - _id
   - name
   - phoneNumber
-  - email
   - isFavourite
   - contactType
   - userId
-  - photo
   - createdAt
   - updatedAt
 properties:
@@ -57,7 +55,3 @@ properties:
     type: string
     format: date-time
     example: 2024-12-15T09:27:36.051Z
-  __v:
-    description: Version application
-    type: string
-    example: 0
