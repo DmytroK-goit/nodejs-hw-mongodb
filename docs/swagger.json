@@ -45,11 +45,7 @@
                 "required": [
                   "name",
                   "phoneNumber",
-                  "email",
-                  "isFavourite",
-                  "contactType",
-                  "userId",
-                  "photo"
+                  "contactType"
                 ],
                 "properties": {
                   "name": {
@@ -81,11 +77,6 @@
                       "personal"
                     ],
                     "example": "personal"
-                  },
-                  "userId": {
-                    "description": "User's ID associated with the contact",
-                    "type": "string",
-                    "example": "67598c91a100dace958e83d1"
                   },
                   "photo": {
                     "description": "Contact's photo",
@@ -429,11 +420,6 @@
                     ],
                     "example": "personal"
                   },
-                  "userId": {
-                    "description": "User's ID associated with the contact",
-                    "type": "string",
-                    "example": "67598c91a100dace958e83d1"
-                  },
                   "photo": {
                     "description": "Contact's photo",
                     "type": "string",
@@ -501,7 +487,9 @@
           "_id",
           "name",
           "phoneNumber",
+          "isFavourite",
           "contactType",
+          "userId",
           "createdAt",
           "updatedAt"
         ],
@@ -565,11 +553,6 @@
             "type": "string",
             "format": "date-time",
             "example": "2024-12-15T09:27:36.051Z"
-          },
-          "__v": {
-            "description": "Version application",
-            "type": "string",
-            "example": 0
           }
         }
       }
