@@ -42,6 +42,7 @@ export async function loginUser(email, password) {
 
   return Session.create({
     userId: user._id,
+    userName: user.name,
     accessToken: crypto.randomBytes(30).toString('base64'),
     refreshToken: crypto.randomBytes(30).toString('base64'),
     accessTokenValidUntil: new Date(Date.now() + 15 * 60 * 1000),

@@ -10,6 +10,10 @@ const sessionSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    userName: {
+      type: String,
+      required: true,
+    },
     refreshToken: {
       type: String,
       required: true,

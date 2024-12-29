@@ -43,7 +43,7 @@ export async function loginController(req, res) {
     message: 'Successfully logged in an user!',
     data: {
       accessToken: session.accessToken,
-      username: user.username,
+      userName: session.userName,
     },
   });
 }
@@ -80,7 +80,7 @@ export async function refreshController(req, res) {
     message: 'Session refreshed',
     data: {
       accessToken: session.accessToken,
-      username: user.username,
+      userName: session.userName,
     },
   });
 }
