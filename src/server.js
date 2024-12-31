@@ -13,12 +13,7 @@ const app = express();
 
 app.use(cookieParser());
 app.use('/photos', express.static(path.resolve('src/public/photo')));
-app.use(
-  cors({
-    origin: 'http://localhost:5173',
-    credentials: true,
-  }),
-);
+app.use(cors());
 app.use(express.json());
 app.use('/api-docs', swaggerDocs());
 
