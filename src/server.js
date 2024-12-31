@@ -15,7 +15,7 @@ app.use(cookieParser());
 app.use('/photos', express.static(path.resolve('src/public/photo')));
 app.use(
   cors({
-    origin: 'https://nodejs-hw-mongodb-2hns.onrender.com/',
+    origin: 'http://localhost:5173',
     credentials: true,
   }),
 );
