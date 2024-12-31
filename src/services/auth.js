@@ -56,6 +56,7 @@ export async function logoutUser(sessionId) {
 
 export async function refreshSession(sessionId, refreshToken) {
   const session = await Session.findById(sessionId);
+  console.log(session);
 
   if (session === null) {
     throw createHttpError(401, 'Session not found');
@@ -69,14 +70,20 @@ export async function refreshSession(sessionId, refreshToken) {
     throw createHttpError(401, 'Refresh token is expired');
   }
 
+  const user = await User.findById(session.userId);
+  if (!user) {
+    throw createHttpError(404, 'User not found');
+  }
+
   await Session.deleteOne({ _id: session._id });
 
   return Session.create({
-    userId: session.userId,
+    userId: user._id,
+    userName: user.name,
     accessToken: crypto.randomBytes(30).toString('base64'),
     refreshToken: crypto.randomBytes(30).toString('base64'),
-    accessTokenValidUntil: new Date(Date.now() + 15 * 60 * 1000),
-    refreshTokenValidUntil: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+    accessTokenValidUntil: new Date(Date.now() + 15 * 60 * 1000), // Термін дії токену 15 хвилин
+    refreshTokenValidUntil: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // Термін дії refresh токену 30 днів
   });
 }
 export async function requestResetPassword(email) {
