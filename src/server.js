@@ -13,7 +13,12 @@ const app = express();
 
 app.use(cookieParser());
 app.use('/photos', express.static(path.resolve('src/public/photo')));
-app.use(cors());
+app.use(
+  cors({
+    origin: 'https://phone-book-full-stack.vercel.app', // Дозволяє запити лише з цього домену
+    credentials: true, // Дозволяє передачу кук
+  }),
+);
 app.use(express.json());
 app.use('/api-docs', swaggerDocs());
 
