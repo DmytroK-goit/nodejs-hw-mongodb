@@ -12,7 +12,7 @@ import { swaggerDocs } from './middlewares/swaggerDocs.js';
 export const SWAGGER_PATH = path.join(process.cwd(), 'docs', 'swagger.json');
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://phone-book-full-stack.vercel.app/',
+  'https://phone-book-full-stack.vercel.app',
 ];
 const app = express();
 
