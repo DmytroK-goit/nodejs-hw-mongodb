@@ -72,6 +72,8 @@ export async function refreshController(req, res) {
 
   res.cookie('refreshToken', session.refreshToken, {
     httpOnly: true,
+    secure: true,
+    sameSite: 'None',
     expires: session.refreshTokenValidUntil,
   });
 
