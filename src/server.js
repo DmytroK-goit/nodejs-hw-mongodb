@@ -8,12 +8,22 @@ import { errorHandler } from '../src/middlewares/errorHandler.js';
 import { notFoundHandler } from '../src/middlewares/notFoundHandler.js';
 import cookieParser from 'cookie-parser';
 import { swaggerDocs } from './middlewares/swaggerDocs.js';
+
 export const SWAGGER_PATH = path.join(process.cwd(), 'docs', 'swagger.json');
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://phone-book-full-stack.vercel.app/',
+];
 const app = express();
 
 app.use(cookieParser());
 app.use('/photos', express.static(path.resolve('src/public/photo')));
-app.use(cors());
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  }),
+);
 app.use(express.json());
 app.use('/api-docs', swaggerDocs());
 
