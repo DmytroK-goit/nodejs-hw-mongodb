@@ -105,8 +105,14 @@ export async function updContactController(req, res) {
   const { id } = req.params;
   const userId = req.user._id;
 
-  let photo = null;
-  if (typeof req.file !== 'undefined') {
+  const existingContact = await getContact(id, userId);
+  if (!existingContact) {
+    throw new createHttpError.NotFound('Contact not found');
+  }
+
+  let photo = existingContact.photo;
+
+  if (req.file) {
     if (process.env.ENABLE_CLOUDINARY === 'true') {
       const resultPhoto = await uploadToCloudinary(req.file.path);
       await fs.unlink(req.file.path);
@@ -119,6 +125,7 @@ export async function updContactController(req, res) {
       photo = `http://localhost:8080/contacts/photos/${req.file.filename}`;
     }
   }
+
   const contact = {
     name: req.body.name,
     phoneNumber: req.body.phoneNumber,
@@ -129,9 +136,6 @@ export async function updContactController(req, res) {
   };
 
   const result = await updContact(id, contact, userId);
-  if (result === null) {
-    throw new createHttpError.NotFound('Contact not found');
-  }
   res.send({
     status: 200,
     message: 'Contact updated successfully',
